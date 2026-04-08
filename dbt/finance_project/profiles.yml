@@ -1,0 +1,13 @@
+finance_project:
+  outputs:
+    dev:
+      account: ouhsqtw-kab17767
+      database: MARKET_DB
+      password: N@qiboubker140105
+      role: ACCOUNTADMIN
+      schema: ANALYTICS
+      threads: 1
+      type: snowflake
+      user: BOUBKER
+      warehouse: COMPUTE_WH
+  target: dev

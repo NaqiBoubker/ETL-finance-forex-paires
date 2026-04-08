@@ -1,0 +1,6 @@
+symbol,asset_name,base_currency,quote_currency,type
+EURUSD,Euro vs US Dollar,EUR,USD,forex
+GBPUSD,British Pound vs US Dollar,GBP,USD,forex
+EURGBP,Euro vs British Pound,EUR,GBP,forex
+USDCHF,US Dollar vs Swiss Franc,USD,CHF,forex
+EURAUD,Euro vs Australian Dollar,EUR,AUD,forex

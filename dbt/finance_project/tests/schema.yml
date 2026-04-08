@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: stg_prices
+    columns:
+      - name: date
+        tests:
+          - not_null
+
+      - name: symbol
+        tests:
+          - not_null
+
+    tests:
+      - unique:
+          column_name: "(date || '-' || symbol)"
+
+  - name: fact_market_metrics
+    columns:
+      - name: date
+        tests:
+          - not_null
+
+      - name: symbol
+        tests:
+          - not_null
+
+      - name: close
+        tests:
+          - not_null
+
+    tests:
+      - unique:
+          column_name: "(date || '-' || symbol)"

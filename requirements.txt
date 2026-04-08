@@ -1,0 +1,18 @@
+pandas
+requests
+snowflake-connector-python
+snowflake-sqlalchemy
+sqlalchemy
+python-dotenv
+yfinance
+alpha-vantage
+confluent-kafka
+dbt-core
+dbt-snowflake
+
+later apache-airflow
+pendulum
+numpy
+
+streamlit run app/streamlit_app.py
+venv\Scripts\Activate

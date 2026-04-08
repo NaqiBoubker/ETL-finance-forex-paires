@@ -1,0 +1,248 @@
+financial-data-platform/
+│
+├── airflow/
+│   ├── dags/
+│   │   ├── market_batch_pipeline.py
+│   │   ├── dbt_pipeline.py
+│   │   └── kafka_stream_pipeline.py
+│   │
+│   ├── plugins/
+│   │   ├── operators/
+│   │   │   ├── snowflake_operator.py
+│   │   │   └── kafka_operator.py
+│   │   │
+│   │   └── hooks/
+│   │       └── custom_hook.py
+│   │
+│   ├── config/
+│   │   └── airflow.cfg
+│   │
+│   └── requirements.txt
+│
+├── dbt/
+│   ├── models/
+│   │   ├── staging/
+│   │   │   ├── stg_prices.sql
+│   │   │   └── stg_fundamentals.sql
+│   │   │
+│   │   ├── intermediate/
+│   │   │   ├── int_returns.sql
+│   │   │   └── int_volatility.sql
+│   │   │
+│   │   ├── marts/
+│   │   │   ├── fact_prices.sql
+│   │   │   ├── fact_returns.sql
+│   │   │   └── fact_volatility.sql
+│   │   │
+│   │   └── schema.yml
+│   │
+│   ├── seeds/
+│   │   └── sample_assets.csv
+│   │
+│   ├── snapshots/
+│   │   └── snapshot_prices.sql
+│   │
+│   ├── tests/
+│   │   └── test_prices.yml
+│   │
+│   ├── macros/
+│   │   └── calculations.sql
+│   │
+│   ├── dbt_project.yml
+│   └── profiles.yml
+│
+├── ingestion/
+│   ├── api_clients/
+│   │   ├── yahoo_client.py
+│   │   └── alpha_vantage_client.py
+│   │
+│   ├── loaders/
+│   │   ├── snowflake_loader.py
+│   │   └── kafka_producer.py
+│   │
+│   ├── jobs/
+│   │   └── historical_ingestion.py
+│   │
+│   └── utils/
+│       └── helpers.py
+│
+├── streaming/
+│   ├── producers/
+│   │   ├── market_producer.py
+│   │   └── websocket_producer.py
+│   │
+│   ├── consumers/
+│   │   ├── snowflake_consumer.py
+│   │   └── processing_consumer.py
+│   │
+│   ├── schemas/
+│   │   └── market_schema.json
+│   │
+│   └── config/
+│       └── kafka_config.yml
+│
+├── ml/
+│   ├── notebooks/
+│   │   └── exploratory_analysis.ipynb
+│   │
+│   ├── features/
+│   │   └── feature_engineering.py
+│   │
+│   ├── models/
+│   │   └── train_model.py
+│   │
+│   └── pipelines/
+│       └── training_pipeline.py
+│
+├── configs/
+│   ├── snowflake.yml
+│   ├── kafka.yml
+│   ├── airflow.yml
+│   └── dbt.yml
+│
+├── docker/
+│   ├── airflow/
+│   │   └── Dockerfile
+│   │
+│   ├── ingestion/
+│   │   └── Dockerfile
+│   │
+│   ├── streaming/
+│   │   └── Dockerfile
+│   │
+│   └── dbt/
+│       └── Dockerfile
+│
+├── scripts/
+│   ├── start.sh
+│   └── init_snowflake.sql
+│
+├── tests/
+│   ├── ingestion_tests.py
+│   ├── streaming_tests.py
+│   └── dbt_tests.yml
+│
+├── docs/
+│   ├── architecture.md
+│   ├── data_model.md
+│   └── pipelines.md
+│
+├── .env
+├── .gitignore
+├── docker-compose.yml
+├── requirements.txt
+└── README.md
+
+
+
+
+
+
+
+
+📈 Trend
+ma_5 > ma_20 → bullish
+
+ma_5 < ma_20 → bearish
+
+⚡ Momentum
+RSI > 70 → overbought
+
+RSI < 30 → oversold
+
+👉 This is literally how trading systems start
+
+
+
+
+
+
+├── airflow
+│   ├── dags
+│   │   └── market_batch_pipeline.py
+│   ├── logs
+│   │   ├── dag_id=daily_fx_pipeline
+│   │   │   ├── run_id=manual__2026-03-25T184903.295134+0000
+│   │   │   │   ├── task_id=dbt_run
+│   │   │   │   └── task_id=ingest_fx_data
+│   │   │   ├── run_id=manual__2026-03-26T144645.091014+0000
+│   │   │   │   ├── task_id=dbt_run
+│   │   │   │   ├── task_id=dbt_test
+│   │   │   │   └── task_id=ingest_fx_data
+│   │   │   ├── run_id=scheduled__2026-03-24T060000+0000
+│   │   │   │   ├── task_id=dbt_run
+│   │   │   │   └── task_id=ingest_fx_data
+│   │   │   └── run_id=scheduled__2026-03-25T060000+0000
+│   │   │       ├── task_id=dbt_run
+│   │   │       ├── task_id=dbt_test
+│   │   │       └── task_id=ingest_fx_data
+│   │   ├── dag_processor_manager
+│   │   └── scheduler
+│   │       ├── 2026-03-25
+│   │       └── 2026-03-26
+│   ├── plugins
+│   │   ├── hooks
+│   │   └── operators
+│   └── requirments.txt
+├── app
+│   └── streamlit_app.py
+├── configs
+│   ├── airflow.yml
+│   ├── dbt.yml
+│   ├── kafka.yml
+│   └── snowflake.yml
+├── dbt
+│   └── finance_project
+│       ├── analyses
+│       │   └── .gitkeep
+│       ├── logs
+│       ├── macros
+│       │   └── .gitkeep
+│       ├── models
+│       │   ├── intermediate
+│       │   │   ├── int_moving_avg.sql
+│       │   │   ├── int_returns.sql
+│       │   │   ├── int_rsi.sql
+│       │   │   ├── int_vol_regime.sql
+│       │   │   └── int_volatility.sql
+│       │   ├── marts
+│       │   │   ├── fact_backtest.sql
+│       │   │   ├── fact_enriched.sql
+│       │   │   ├── fact_features.sql
+│       │   │   ├── fact_market_metrics.sql
+│       │   │   ├── fact_performance.sql
+│       │   │   └── fact_signals.sql
+│       │   └── staging
+│       │       └── stg_prices.sql
+│       ├── seeds
+│       │   ├── .gitkeep
+│       │   └── dim_asset.csv
+│       ├── snapshots
+│       │   └── .gitkeep
+│       ├── tests
+│       │   ├── .gitkeep
+│       │   └── schema.yml
+│       ├── .gitignore
+│       ├── .user.yml
+│       ├── README.md
+│       ├── dbt_project.yml
+│       └── profiles.yml
+├── ingestion
+│   ├── jobs
+│   │   └── historical_ingestion.py
+│   ├── utils
+│   │   └── helpers.py
+│   └── ing_workin.py
+├── ml
+│   ├── features
+│   ├── models
+│   ├── notebooks
+│   └── pipelines
+├── streaming
+│   ├── config
+│   ├── consumers
+│   ├── producers
+│   └── schemas
+├── docker-compose.yml
+├── requirements.txt
+└── stuct.txt

@@ -1,0 +1,53 @@
+x-airflow-common: &airflow-common
+  image: apache/airflow:2.8.1-python3.11
+  environment:
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__CORE__FERNET_KEY: ''
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'false'
+    AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+    AIRFLOW__WEBSERVER__SECRET_KEY: ${AIRFLOW__WEBSERVER__SECRET_KEY}
+    PYTHONPATH: /opt/airflow/project
+  volumes:
+    - ./airflow/dags:/opt/airflow/dags
+    - ./airflow/logs:/opt/airflow/logs
+    - ./airflow/plugins:/opt/airflow/plugins
+    - .:/opt/airflow/project
+  depends_on:
+    postgres:
+      condition: service_healthy
+
+services:
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres_db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 5s
+      retries: 5
+
+  airflow-init:
+    <<: *airflow-common
+    command: bash -c "pip install yfinance snowflake-connector-python 'dbt-core==1.8.7' 'dbt-snowflake==1.8.4' && airflow db migrate && airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com"
+    restart: on-failure
+
+  airflow-webserver:
+    <<: *airflow-common
+    command: bash -c "pip install yfinance snowflake-connector-python 'dbt-core==1.8.7' 'dbt-snowflake==1.8.4' && airflow webserver"
+    ports:
+      - "8080:8080"
+    restart: always
+
+  airflow-scheduler:
+    <<: *airflow-common
+    command: bash -c "pip install yfinance snowflake-connector-python 'dbt-core==1.8.7' 'dbt-snowflake==1.8.4' && airflow scheduler"
+    restart: always
+
+volumes:
+  postgres_db:

@@ -1,0 +1,12 @@
+{
+  "topic": "fx_prices",
+  "fields": [
+    {"name": "symbol", "type": "string"},
+    {"name": "date", "type": "string"},
+    {"name": "open", "type": "float"},
+    {"name": "high", "type": "float"},
+    {"name": "low", "type": "float"},
+    {"name": "close", "type": "float"},
+    {"name": "timestamp", "type": "string"}
+  ]
+}

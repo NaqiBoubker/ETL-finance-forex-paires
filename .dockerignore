@@ -1,0 +1,10 @@
+airflow/logs/
+airflow/plugins/
+dbt/finance_project/target/
+dbt/finance_project/logs/
+ml/
+app/
+.env
+.git
+__pycache__
+*.pyc

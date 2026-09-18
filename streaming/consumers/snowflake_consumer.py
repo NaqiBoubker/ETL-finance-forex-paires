@@ -15,7 +15,7 @@ TOPIC = "fx_prices"
 
 def get_consumer():
     return Consumer({
-        "bootstrap.servers": "localhost:9092",
+        "bootstrap.servers": "kafka:29092",
         "group.id":          "snowflake_sink",
         "auto.offset.reset": "earliest"
     })

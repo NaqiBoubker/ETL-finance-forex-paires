@@ -13,7 +13,7 @@ TOPIC    = "fx_prices"
 INTERVAL = 60  # seconds
 
 def get_producer():
-    return Producer({"bootstrap.servers": "localhost:9092"})
+    return Producer({"bootstrap.servers": "kafka:29092"})
 
 def delivery_report(err, msg):
     if err:

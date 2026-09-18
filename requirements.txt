@@ -16,3 +16,4 @@ numpy
 
 streamlit run app/streamlit_app.py
 venv\Scripts\Activate
+#pip install hmmlearn scikit-learn joblib

@@ -1,0 +1,8 @@
+kafka:
+  bootstrap_servers: "localhost:9092"
+  topic: "fx_prices"
+  producer:
+    poll_interval_seconds: 60
+  consumer:
+    group_id: "snowflake_sink"
+    auto_offset_reset: "earliest"

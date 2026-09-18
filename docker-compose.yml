@@ -70,10 +70,33 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
 
+  kafka-producer:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: python streaming/producers/market_producer.py
+    env_file: .env
+    environment:
+      PYTHONPATH: /app
+    volumes:
+      - .:/app
+    depends_on:
+      - kafka
+    restart: always
 
-
+  kafka-consumer:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: python streaming/consumers/snowflake_consumer.py
+    env_file: .env
+    environment:
+      PYTHONPATH: /app
+    volumes:
+      - .:/app
+    depends_on:
+      - kafka
+    restart: always
 
 volumes:
   postgres_db:
-
-

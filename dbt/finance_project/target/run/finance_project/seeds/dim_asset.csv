@@ -1,0 +1,14 @@
+
+    
+    
+    
+    create table MARKET_DB.ANALYTICS.dim_asset (symbol text,asset_name text,base_currency text,quote_currency text,type text)
+  ;
+    -- dbt seed --
+    
+            insert into MARKET_DB.ANALYTICS.dim_asset (symbol, asset_name, base_currency, quote_currency, type) values
+            (%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s)
+        
+
+;
+  

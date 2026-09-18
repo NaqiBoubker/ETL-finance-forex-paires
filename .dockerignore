@@ -1,6 +1,6 @@
 airflow/logs/
 airflow/plugins/
-dbt/finance_project/target/
+
 dbt/finance_project/logs/
 ml/
 app/
